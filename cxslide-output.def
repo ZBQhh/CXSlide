@@ -1,0 +1,56 @@
+%% ============================================================
+%% cxslide-output.def — 输出模式适配
+%% ============================================================
+
+%%── Notes 双屏 ──
+\ExplSyntaxOn
+\AtBeginDocument
+{
+  \cxs_if_output:nT { handout }
+  {
+    \setbeamercolor{normal text}{fg=black, bg=white}
+    \setbeamercolor{frametitle}{fg=black, bg=black!10}
+    \setbeamercolor{structure}{fg=black!80}
+    \setbeamercolor{alerted text}{fg=black}
+    \setbeamercolor{example text}{fg=black!60}
+    \setbeamercolor{block title}{fg=white, bg=black!70}
+    \setbeamercolor{block body}{fg=black, bg=black!3}
+    \setbeamercolor{block title alerted}{fg=white, bg=black!60}
+    \setbeamercolor{block body alerted}{fg=black, bg=black!3}
+    \setbeamercolor{block title example}{fg=white, bg=black!50}
+    \setbeamercolor{block body example}{fg=black, bg=black!3}
+    \setbeamercolor{progress bar}{fg=black!50, bg=black!10}
+    \setbeamercolor{footline}{fg=black!50}
+    \setbeamercolor{page number in head/foot}{fg=black!50}
+    \setbeamercolor{title separator}{fg=black!50}
+    \setbeamerfont{alerted text}{series=\bfseries}
+    \setbeamercovered{invisible}
+  }
+  \cxs_if_output:nT { trans }
+  {
+    \setbeamercolor{normal text}{fg=black, bg=white}
+    \setbeamercolor{frametitle}{fg=black, bg=white}
+    \setbeamercolor{structure}{fg=black}
+    \setbeamercolor{alerted text}{fg=black}
+    \setbeamercolor{block title}{fg=black, bg=black!10}
+    \setbeamercolor{block body}{fg=black, bg=white}
+    \setbeamertemplate{headline}{}
+    \setbeamertemplate{footline}{}
+    \setbeamercovered{invisible}
+    \setbeamerfont{alerted text}{series=\bfseries}
+  }
+}
+
+\cxs_if_output:nT { notes }
+{
+  \RequirePackage{pgfpages}
+  % Notes 双屏会在一个物理页上排两套逻辑页，关闭锚点可避免重复对象告警。
+  \hypersetup{pageanchor=false}
+  \cs_if_exist:NT \Hy@EveryPageAnchor
+    { \cs_gset_protected:Npn \Hy@EveryPageAnchor {} }
+  \setbeameroption{show~notes~on~second~screen=right}
+  \setbeamertemplate{note~page}{\insertnote}
+  \setbeamerfont{note~page}{size=\small}
+  \msg_info:nn { cxslide } { notes-info }
+}
+\ExplSyntaxOff

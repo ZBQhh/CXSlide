@@ -1,0 +1,24 @@
+%% ============================================================
+%% cxslide-overlay.def — Overlay 辅助工具
+%% ============================================================
+
+%% \cxFixedArea[height]{content}
+\NewDocumentCommand{\cxFixedArea}{ O{3em} +m }{%
+  \begin{overlayarea}{\linewidth}{#1}#2\end{overlayarea}%
+}
+
+%% \cxStepReveal{item1 | item2 | item3}
+%% 使用 | 分隔（\\ 在 xparse SplitList 中不可靠）
+\ExplSyntaxOn
+\int_new:N \g__cxs_step_int
+\NewDocumentCommand { \cxStepReveal } { >{ \SplitList{|}  } m }
+{
+  \int_gzero:N \g__cxs_step_int
+  \ProcessList {#1} { \__cxs_step_item:n }
+}
+\cs_new_protected:Nn \__cxs_step_item:n
+{
+  \int_gincr:N \g__cxs_step_int
+  \onslide< \int_use:N \g__cxs_step_int - >{ #1 \par }
+}
+\ExplSyntaxOff

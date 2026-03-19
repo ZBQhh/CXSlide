@@ -1,0 +1,68 @@
+%% ============================================================
+%% cxslide-palette-data.def — 调色板原始色值（纯数据，零逻辑）
+%% 每个调色板 7 色: primary secondary accent bg fg muted highlight
+%% ============================================================
+\ExplSyntaxOn
+
+\prop_const_from_keyval:Nn \c__cxs_pal_steel_prop
+{
+  primary=1B3A5C, secondary=4A90B8, accent=E87722,
+  bg=F5F5F5, fg=1A1A1A, muted=999999, highlight=FFF3E0,
+}
+\prop_const_from_keyval:Nn \c__cxs_pal_forest_prop
+{
+  primary=1B4332, secondary=52796F, accent=D4A04A,
+  bg=F0F4F0, fg=1A1A1A, muted=8A8A8A, highlight=FFF8E1,
+}
+\prop_const_from_keyval:Nn \c__cxs_pal_ember_prop
+{
+  primary=5D1A2E, secondary=8B4557, accent=C47032,
+  bg=FAF8F5, fg=1A1A1A, muted=8A8A8A, highlight=FDE8E0,
+}
+\prop_const_from_keyval:Nn \c__cxs_pal_graphite_prop
+{
+  primary=2D2D2D, secondary=5A5A5A, accent=00A8CC,
+  bg=F0F0F0, fg=1A1A1A, muted=909090, highlight=E0F7FA,
+}
+\prop_const_from_keyval:Nn \c__cxs_pal_ocean_prop
+{
+  primary=003B5C, secondary=0077B6, accent=F4A261,
+  bg=F5F9FC, fg=1A1A1A, muted=8899AA, highlight=FFF3E0,
+}
+\prop_const_from_keyval:Nn \c__cxs_pal_ivory_prop
+{
+  primary=3C2415, secondary=7B5B3A, accent=B85C38,
+  bg=FFFEF5, fg=1A1A1A, muted=A09080, highlight=FDEBD0,
+}
+\prop_const_from_keyval:Nn \c__cxs_pal_chalk_prop
+{
+  primary=F5F5DC, secondary=87CEEB, accent=FFD700,
+  bg=2C3E2D, fg=F5F5DC, muted=A0B0A0, highlight=3D5C3E,
+}
+\prop_const_from_keyval:Nn \c__cxs_pal_dusk_prop
+{
+  primary=4A1A6B, secondary=7B52AB, accent=E8A838,
+  bg=FAF5FF, fg=1A1A1A, muted=9A8AAA, highlight=FFF8E1,
+}
+\prop_const_from_keyval:Nn \c__cxs_pal_clinical_prop
+{
+  primary=005B96, secondary=6497B1, accent=D32F2F,
+  bg=FFFFFF, fg=212121, muted=9E9E9E, highlight=FFEBEE,
+}
+\prop_const_from_keyval:Nn \c__cxs_pal_terra_prop
+{
+  primary=5D4037, secondary=8D6E63, accent=E65100,
+  bg=FFF8F0, fg=1A1A1A, muted=A1887F, highlight=FFF3E0,
+}
+\prop_const_from_keyval:Nn \c__cxs_pal_sakura_prop
+{
+  primary=AD1457, secondary=E91E63, accent=7B1FA2,
+  bg=FFF5F7, fg=1A1A1A, muted=C48B9F, highlight=F3E5F5,
+}
+\prop_const_from_keyval:Nn \c__cxs_pal_mono_prop
+{
+  primary=000000, secondary=333333, accent=FFD600,
+  bg=000000, fg=FFFFFF, muted=888888, highlight=333300,
+}
+
+\ExplSyntaxOff

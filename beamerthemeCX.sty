@@ -1,0 +1,50 @@
+%% ============================================================
+%% beamerthemeCX.sty — CXSlide 工业级中文演示主题 v3.0
+%%
+%% 用法：
+%%   \documentclass[aspectratio=169, UTF8]{ctexbeamer}
+%%   \usetheme[palette=steel, compact]{CX}
+%% ============================================================
+\NeedsTeXFormat{LaTeX2e}[2023/06/01]
+\ProvidesPackage{beamerthemeCX}[2025/07/09 v3.0
+  CXSlide Industrial Chinese Presentation Theme]
+
+%% Phase 0: 基础设施
+\RequirePackage{expl3}[2023/10/10]
+\RequirePackage{xparse}
+
+%% Phase 1: 选项解析
+\input{cxslide-options.def}
+\ProcessKeyOptions[cxslide]
+
+%% Phase 2: 诊断
+\input{cxslide-diag.def}
+
+%% Phase 3: 宏包依赖（每行附理由）
+\RequirePackage{unicode-math}           % 数学字体
+\RequirePackage{graphicx}               % 图片
+\RequirePackage{tabularray}             % 表格
+\RequirePackage{listings}               % 代码
+\RequirePackage{etoolbox}               % \ifblank 等工具宏
+\RequirePackage{appendixnumberbeamer}   % \appendix 帧号重置
+
+%% Phase 4: Beamer 四子主题
+\usecolortheme{CX}
+\usefonttheme{CX}
+\useinnertheme{CX}
+\useoutertheme{CX}
+
+%% Phase 5: 功能模块
+\input{cxslide-math.def}
+\input{cxslide-layout.def}
+\input{cxslide-code.def}
+\input{cxslide-overlay.def}
+\input{cxslide-output.def}
+\input{cxslide-titlepage.def}
+\input{cxslide-enhance.def}
+
+%% Phase 6: 全局不可变设定
+\setbeamertemplate{navigation symbols}{}
+\setbeamercovered{transparent=15}
+
+\endinput

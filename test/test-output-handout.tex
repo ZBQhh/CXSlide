@@ -1,0 +1,38 @@
+\documentclass[aspectratio=169, UTF8, handout]{ctexbeamer}
+\usetheme[
+  palette=ivory,
+  output=handout,
+  progress=bar,
+  footstyle=full,
+  secpage=false,
+  endpage=false
+]{CX}
+
+\title{CXSlide Handout Test}
+\author{CI}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}[plain, noframenumbering]
+  \titlepage
+\end{frame}
+
+\begin{frame}{Gray Output}
+  \begin{itemize}
+    \item Normal text should stay readable in grayscale.
+    \item \alert{Alert text} should degrade to bold emphasis.
+    \item Covered content should not create extra handout pages.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Blocks}
+  \begin{block}{Block}
+    Handout mode should keep high contrast.
+  \end{block}
+  \begin{alertblock}{Alert}
+    Alert block should remain distinguishable.
+  \end{alertblock}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,80 @@
+%% ============================================================
+%% cxslide-enhance.def — 增强功能
+%% ============================================================
+
+%% tikz 用于浮动定位（Beamer 无原生接口），见 P2 合规注释
+\RequirePackage{tikz}
+
+%% \cxCite{ref} — 帧底部微型引用
+\NewDocumentCommand{\cxCite}{ m }{%
+  \par\vfill{\usebeamerfont{footnote}\usebeamercolor[fg]{footline}#1}}
+
+%% cxReferences 环境
+\NewDocumentEnvironment{cxReferences}{+b}{%
+  \begin{frame}[allowframebreaks]{参考文献}
+    \footnotesize
+    \begin{thebibliography}{99}
+      #1
+    \end{thebibliography}
+  \end{frame}
+}{}
+
+%% \cxHL<overlay>{text} — 荧光笔
+\NewDocumentCommand{\cxHL}{ D<>{} m }{%
+  \ifblank{#1}%
+    {\colorbox{cx@highlight}{#2}}%
+    {\alt<#1>{\colorbox{cx@highlight}{#2}}{#2}}}
+
+%% \cxDim<overlay>{text} — 弱化
+\NewDocumentCommand{\cxDim}{ D<>{} m }{%
+  \ifblank{#1}%
+    {{\color{cx@muted}#2}}%
+    {\alt<#1>{{\color{cx@muted}#2}}{#2}}}
+
+%% \cxBadge[color]{text} — 标签
+%% 使用 TikZ：Beamer 无内联标签模板
+\NewDocumentCommand{\cxBadge}{ O{cx@primary} m }{%
+  \tikz[baseline=(X.base)]
+    \node[fill=#1, text=white, rounded corners=2pt,
+          inner xsep=0.4em, inner ysep=0.1em,
+          font=\scriptsize\bfseries] (X) {#2};}
+
+%% \cxVersus{ltitle}{lcontent}{rtitle}{rcontent}
+\NewDocumentCommand{\cxVersus}{ m +m m +m }{%
+  \begin{columns}[T, totalwidth=\linewidth]
+    \begin{column}{0.47\linewidth}
+      \begin{block}{#1}#2\end{block}
+    \end{column}
+    \begin{column}{0.47\linewidth}
+      \begin{alertblock}{#3}#4\end{alertblock}
+    \end{column}
+  \end{columns}}
+
+%% \cxSummary{title}{content}
+\NewDocumentCommand{\cxSummary}{ m +m }{%
+  \begin{beamercolorbox}[sep=0.5em, rounded=true]{block body}
+    {\usebeamerfont{block title}\usebeamercolor[fg]{block title}#1\par}
+    \vskip 0.3em #2
+  \end{beamercolorbox}}
+
+%% \cxTimeEstimate{min} — 帧角落用时提示
+%% 使用 TikZ overlay：Beamer 无帧角落浮动元素模板
+\NewDocumentCommand{\cxTimeEstimate}{ m }{%
+  \mode<presentation>{%
+    \begin{tikzpicture}[remember picture, overlay]
+      \node[anchor=south east, font=\tiny, text=cx@muted]
+        at (current page.south east) {$\approx$#1\,min};
+    \end{tikzpicture}}}
+
+%% \cxWatermark{text}
+%% 使用 TikZ overlay：Beamer background 需要 TikZ 定位
+\NewDocumentCommand{\cxWatermark}{ m }{%
+  \setbeamertemplate{background}{%
+    \begin{tikzpicture}[remember picture, overlay]
+      \node[rotate=30, scale=5, text=cx@muted!20!cx@bg,
+            font=\bfseries] at (current page.center) {#1};
+    \end{tikzpicture}}}
+
+\NewDocumentCommand{\cxClearWatermark}{}{%
+  \setbeamertemplate{background}{}%
+}

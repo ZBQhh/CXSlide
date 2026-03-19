@@ -1,0 +1,130 @@
+%% ============================================================
+%% cxslide-options.def — 选项解析模块（零依赖，最先加载）
+%% ============================================================
+\ExplSyntaxOn
+
+% ── 内部状态变量 ──
+\tl_new:N   \g__cxs_ratio_tl
+\tl_new:N   \g__cxs_palette_tl
+\tl_new:N   \g__cxs_output_tl
+\bool_new:N \g__cxs_compact_bool
+\tl_new:N   \g__cxs_progress_tl
+\bool_new:N \g__cxs_secpage_bool
+\tl_new:N   \g__cxs_titlepage_tl
+\bool_new:N \g__cxs_endpage_bool
+\tl_new:N   \g__cxs_footstyle_tl
+\tl_new:N   \g__cxs_blockcorner_tl
+
+% ── 键定义 ──
+\keys_define:nn { cxslide }
+{
+  ratio .choice:,
+  ratio / standard .code:n = { \tl_gset:Nn \g__cxs_ratio_tl { 169 } },
+  ratio / classic  .code:n = { \tl_gset:Nn \g__cxs_ratio_tl { 43 }  },
+  ratio / wide     .code:n = { \tl_gset:Nn \g__cxs_ratio_tl { 219 } },
+  ratio .initial:n = standard,
+
+  palette .choices:nn =
+    { steel, forest, ember, graphite, ocean, ivory, chalk,
+      dusk, clinical, terra, sakura, mono }
+    { \tl_gset:Nx \g__cxs_palette_tl { \l_keys_choice_tl } },
+  palette .initial:n = steel,
+
+  output .choices:nn =
+    { present, handout, notes, trans, article }
+    { \tl_gset:Nx \g__cxs_output_tl { \l_keys_choice_tl } },
+  output .initial:n = present,
+
+  compact .bool_gset:N = \g__cxs_compact_bool,
+  compact .initial:n   = false,
+  compact .default:n   = true,
+
+  progress .choices:nn =
+    { bar, miniframes, none }
+    { \tl_gset:Nx \g__cxs_progress_tl { \l_keys_choice_tl } },
+  progress .initial:n = bar,
+
+  secpage .bool_gset:N = \g__cxs_secpage_bool,
+  secpage .initial:n   = true,
+  secpage .default:n   = true,
+
+  titlepage .choices:nn =
+    { standard, minimal, none }
+    { \tl_gset:Nx \g__cxs_titlepage_tl { \l_keys_choice_tl } },
+  titlepage .initial:n = standard,
+
+  endpage .bool_gset:N = \g__cxs_endpage_bool,
+  endpage .initial:n   = false,
+  endpage .default:n   = true,
+
+  footstyle .choices:nn =
+    { full, minimal, none }
+    { \tl_gset:Nx \g__cxs_footstyle_tl { \l_keys_choice_tl } },
+  footstyle .initial:n = full,
+
+  blockcorner .choices:nn =
+    { round, sharp }
+    { \tl_gset:Nx \g__cxs_blockcorner_tl { \l_keys_choice_tl } },
+  blockcorner .initial:n = round,
+
+  unknown .code:n =
+  {
+    \msg_error:nnx { cxslide } { unknown-option } { \l_keys_key_str }
+  }
+}
+
+\msg_new:nnn { cxslide } { unknown-option }
+{
+  CXSlide:~ Unknown~ option~ '#1'. \\
+  Available:~ ratio,~ palette,~ output,~ compact,~
+  progress,~ secpage,~ titlepage,~ endpage,~ footstyle,~ blockcorner.
+}
+
+% ── 公开查询接口 ──
+\prg_new_conditional:Nnn \cxs_if_compact: { T, F, TF }
+{
+  \bool_if:NTF \g__cxs_compact_bool
+    \prg_return_true: \prg_return_false:
+}
+\prg_new_conditional:Nnn \cxs_if_secpage: { T, F, TF }
+{
+  \bool_if:NTF \g__cxs_secpage_bool
+    \prg_return_true: \prg_return_false:
+}
+\prg_new_conditional:Nnn \cxs_if_endpage: { T, F, TF }
+{
+  \bool_if:NTF \g__cxs_endpage_bool
+    \prg_return_true: \prg_return_false:
+}
+\prg_new_conditional:Nnn \cxs_if_palette:n { T, F, TF }
+{
+  \tl_if_eq:NnTF \g__cxs_palette_tl {#1}
+    \prg_return_true: \prg_return_false:
+}
+\prg_new_conditional:Nnn \cxs_if_output:n { T, F, TF }
+{
+  \tl_if_eq:NnTF \g__cxs_output_tl {#1}
+    \prg_return_true: \prg_return_false:
+}
+\prg_new_conditional:Nnn \cxs_if_progress:n { T, F, TF }
+{
+  \tl_if_eq:NnTF \g__cxs_progress_tl {#1}
+    \prg_return_true: \prg_return_false:
+}
+\prg_new_conditional:Nnn \cxs_if_titlepage:n { T, F, TF }
+{
+  \tl_if_eq:NnTF \g__cxs_titlepage_tl {#1}
+    \prg_return_true: \prg_return_false:
+}
+\prg_new_conditional:Nnn \cxs_if_footstyle:n { T, F, TF }
+{
+  \tl_if_eq:NnTF \g__cxs_footstyle_tl {#1}
+    \prg_return_true: \prg_return_false:
+}
+\prg_new_conditional:Nnn \cxs_if_blockcorner:n { T, F, TF }
+{
+  \tl_if_eq:NnTF \g__cxs_blockcorner_tl {#1}
+    \prg_return_true: \prg_return_false:
+}
+
+\ExplSyntaxOff

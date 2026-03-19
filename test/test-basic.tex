@@ -1,0 +1,38 @@
+\documentclass[aspectratio=169, UTF8]{ctexbeamer}
+\usetheme[
+  palette=steel,
+  progress=bar,
+  secpage=true,
+  endpage=true
+]{CX}
+
+\title{CXSlide Basic Test}
+\author{CI}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}[plain, noframenumbering]
+  \titlepage
+\end{frame}
+
+\section{Smoke}
+
+\begin{frame}{List And Block}
+  \begin{itemize}
+    \item Item one
+    \item \alert{Alert item}
+  \end{itemize}
+  \begin{block}{Block}
+    Test content.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Math And Overlay}
+  \begin{align}
+    a^2 + b^2 &= c^2 \\
+    \uncover<2->{f(x) &= \hlmath<2>{x^2 + 1}}
+  \end{align}
+\end{frame}
+
+\end{document}

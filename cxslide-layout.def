@@ -1,0 +1,52 @@
+%% ============================================================
+%% cxslide-layout.def — 多栏与图表布局
+%% ============================================================
+
+%% \cxTwoCols[left-ratio]{left}[right-ratio]{right}
+\NewDocumentCommand{\cxTwoCols}{ O{0.48} +m O{0.48} +m }{%
+  \begin{columns}[T, totalwidth=\linewidth]
+    \begin{column}{#1\linewidth}#2\end{column}
+    \begin{column}{#3\linewidth}#4\end{column}
+  \end{columns}%
+}
+
+%% \cxThreeCols[r1]{c1}[r2]{c2}[r3]{c3}
+\NewDocumentCommand{\cxThreeCols}{ O{0.30} +m O{0.30} +m O{0.30} +m }{%
+  \begin{columns}[T, totalwidth=\linewidth]
+    \begin{column}{#1\linewidth}#2\end{column}
+    \begin{column}{#3\linewidth}#4\end{column}
+    \begin{column}{#5\linewidth}#6\end{column}
+  \end{columns}%
+}
+
+%% \cxFigure[width-frac]{path}[caption]
+\NewDocumentCommand{\cxFigure}{ O{0.8} m O{} }{%
+  \begin{center}
+    \includegraphics[width=#1\linewidth]{#2}%
+    \ifblank{#3}{}{%
+      \par\vskip 0.3em
+      {\usebeamerfont{caption}\usebeamercolor[fg]{caption name}#3}}%
+  \end{center}%
+}
+
+%% \cxGallery{n}{img1, img2, ...}
+\ExplSyntaxOn
+\NewDocumentCommand{\cxGallery}{ m m }
+{
+  \begin{columns}[c,~totalwidth=\linewidth]
+    \clist_map_inline:nn {#2}
+    {
+      \begin{column}{ \dim_eval:n { \linewidth / #1 - 0.5em } }
+        \centering
+        \includegraphics[width=\linewidth]{##1}
+      \end{column}
+    }
+  \end{columns}
+}
+\ExplSyntaxOff
+
+%% tabularray 预设
+\NewTblrTheme{cxslide}{
+  \SetTblrStyle{head}{font=\bfseries\small}
+  \SetTblrStyle{foot}{font=\scriptsize}
+}

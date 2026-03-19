@@ -1,0 +1,28 @@
+\documentclass[aspectratio=169, UTF8]{ctexbeamer}
+\usetheme[
+  palette=ocean,
+  progress=none,
+  footstyle=minimal,
+  secpage=false,
+  endpage=false
+]{CX}
+
+\title{CXSlide Media Layout Test}
+\author{CI}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}[plain, noframenumbering]
+  \titlepage
+\end{frame}
+
+\begin{frame}{Single Figure}
+  \cxFigure[0.55]{main-minimal.pdf}[Rendered from an existing project PDF.]
+\end{frame}
+
+\begin{frame}{Gallery}
+  \cxGallery{2}{main-minimal.pdf, main-minimal.pdf}
+\end{frame}
+
+\end{document}

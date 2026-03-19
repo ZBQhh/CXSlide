@@ -1,0 +1,134 @@
+%% ============================================================
+%% cxslide-diag.def — 诊断与错误处理（依赖 options）
+%% ============================================================
+\ExplSyntaxOn
+
+% ── 宏包版本检查 ──
+\cs_new_protected:Nn \__cxs_check_pkg:nn
+{
+  \@ifpackagelater {#1} {#2} { }
+  {
+    \msg_warning:nnnn { cxslide } { old-package } {#1} {#2}
+  }
+}
+\msg_new:nnn { cxslide } { old-package }
+{
+  CXSlide~ Warning:~ Package~ '#1'~ is~ older~ than~ #2. \\
+  Please~ update~ your~ TeX~ Live~ installation.
+}
+
+% ── 宏包冲突检测 ──
+\cs_new_protected:Nn \__cxs_check_conflict:nn
+{
+  \@ifpackageloaded {#1}
+  { \msg_error:nnnn { cxslide } { package-conflict } {#1} {#2} }
+  { }
+}
+\msg_new:nnn { cxslide } { package-conflict }
+{
+  CXSlide~ Error:~ Package~ '#1'~ conflicts~ with~ CXSlide. \\
+  Reason:~ #2.~ Please~ remove~ it.
+}
+
+% ── 调色板错误 ──
+\msg_new:nnn { cxslide } { unknown-palette }
+{
+  CXSlide~ Critical:~ Unknown~ palette~ '#1'. \\
+  Available:~ steel,~ forest,~ ember,~ graphite,~ ocean,~ ivory,~
+  chalk,~ dusk,~ clinical,~ terra,~ sakura,~ mono.
+}
+\msg_new:nnn { cxslide } { missing-palette-key }
+{
+  CXSlide~ Internal~ Error:~ Palette~ '#1'~ is~ missing~ key~ '#2'.
+}
+
+% ── handout 一致性 ──
+\msg_new:nnn { cxslide } { handout-mismatch }
+{
+  CXSlide~ Error:~ output=handout~ is~ set~ but~ 'handout'~ was~ not~
+  passed~ to~ \token_to_str:N \documentclass . \\
+  Please~ use:~ \token_to_str:N \documentclass [handout]{ctexbeamer}
+}
+
+% ── notes 提示 ──
+\msg_new:nnn { cxslide } { notes-info }
+{
+  CXSlide~ Info:~ Notes~ mode~ active.~
+  Output~ PDF~ will~ have~ doubled~ width.
+}
+
+\msg_new:nnn { cxslide } { article-not-implemented }
+{
+  CXSlide~ Error:~ output=article~ is~ reserved~ but~ not~ implemented~ in~ this~ release.
+}
+
+\msg_new:nnn { cxslide } { geometry-managed }
+{
+  CXSlide~ Error:~ Do~ not~ call~ \token_to_str:N \geometry ,
+  \token_to_str:N \newgeometry ,~ or~ \token_to_str:N \restoregeometry . \\
+  Beamer~ and~ CXSlide~ manage~ page~ layout~ internally. \\
+  Use~ \token_to_str:N \documentclass [aspectratio=...]~ for~ canvas~ ratio~
+  and~ CXSlide~ layout~ macros~ for~ content~ structure.
+}
+
+% ── handout 一致性检查 ──
+% 在 present 模式下，如果用户设了 output=handout，报错
+% 注意：不能在 \mode<beamer>{} 中嵌套 \ExplSyntaxOn，
+% 因为 \mode 会把内容作为参数吞掉，catcode 切换不生效。
+% 改为直接在 expl3 中用 Beamer 内部 bool 判断。
+\AtBeginDocument
+{
+  \cxs_if_output:nT { handout }
+  {
+    % Beamer 在类选项层记录当前 mode，handout 会写入 \beamer@currentmode。
+    \str_if_eq:eeF { \beamer@currentmode } { handout }
+    {
+      \msg_error:nn { cxslide } { handout-mismatch }
+    }
+  }
+  \cxs_if_output:nT { article }
+  {
+    \msg_error:nn { cxslide } { article-not-implemented }
+  }
+}
+
+% ── AtBeginDocument 集中检查 ──
+\AtBeginDocument
+{
+  % 版本检查
+  \__cxs_check_pkg:nn { tabularray }   { 2023/01/01 }
+  \__cxs_check_pkg:nn { unicode-math } { 2023/01/01 }
+  \__cxs_check_pkg:nn { listings }     { 2020/01/01 }
+
+  % 冲突检查
+  % 注意：geometry 被 Beamer 自身加载，不能检测它
+  % 因此改为拦截 geometry 的用户入口命令
+  \__cxs_check_conflict:nn { fancyhdr }
+    { Beamer~ manages~ headers/footers~ internally }
+  \__cxs_check_conflict:nn { titlesec }
+    { Beamer~ manages~ section~ titles~ internally }
+  \__cxs_check_conflict:nn { sectsty }
+    { Beamer~ manages~ section~ styles~ internally }
+
+  % 帧溢出容忍度
+  \vfuzz = 0.5ex\relax
+}
+
+% ── 拦截 geometry 手工改版式 ──
+\cs_if_exist:NT \geometry
+{
+  \RenewDocumentCommand \geometry { m }
+    { \msg_error:nn { cxslide } { geometry-managed } }
+}
+\cs_if_exist:NT \newgeometry
+{
+  \RenewDocumentCommand \newgeometry { m }
+    { \msg_error:nn { cxslide } { geometry-managed } }
+}
+\cs_if_exist:NT \restoregeometry
+{
+  \RenewDocumentCommand \restoregeometry { }
+    { \msg_error:nn { cxslide } { geometry-managed } }
+}
+
+\ExplSyntaxOff

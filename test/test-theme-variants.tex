@@ -1,0 +1,49 @@
+\documentclass[aspectratio=169, UTF8]{ctexbeamer}
+\usetheme[
+  palette=graphite,
+  compact,
+  progress=miniframes,
+  footstyle=minimal,
+  secpage=true,
+  endpage=true,
+  titlepage=minimal,
+  blockcorner=sharp
+]{CX}
+
+\title{CXSlide Variant Test}
+\subtitle{compact + miniframes + minimal footline}
+\author{CI}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}[plain, noframenumbering]
+  \titlepage
+\end{frame}
+
+\section{Variant Coverage}
+
+\begin{frame}{Compact Block Styling}
+  \begin{block}{Block}
+    Compact typography and sharp corners should compile together.
+  \end{block}
+  \begin{alertblock}{Alert}
+    Alert block color path remains available.
+  \end{alertblock}
+  \begin{exampleblock}{Example}
+    Example block color path remains available.
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Math and Summary}
+  \begin{smallmath}
+    \[
+      \mathbox{\sum_{k=1}^{n} k} = \hlmath{\frac{n(n+1)}{2}}
+    \]
+  \end{smallmath}
+  \begin{block}{Summary}
+    Compact mode keeps semantic math emphasis usable.
+  \end{block}
+\end{frame}
+
+\end{document}

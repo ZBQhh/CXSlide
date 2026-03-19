@@ -1,0 +1,60 @@
+\documentclass[aspectratio=169, UTF8]{ctexbeamer}
+\usetheme{CX}
+
+\title{CXSlide 最小示例}
+\subtitle{验证骨架可工作}
+\author{作者}
+\institute{某某大学}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}[plain, noframenumbering]
+  \titlepage
+\end{frame}
+
+\begin{frame}{目录}
+  \tableofcontents
+\end{frame}
+
+\section{引言}
+
+\begin{frame}{列表与强调}
+  \begin{itemize}
+    \item 第一点
+    \item \alert{强调}内容
+    \item 嵌套列表
+      \begin{itemize}
+        \item 子项 A
+        \item 子项 B
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{方法}
+
+\begin{frame}{区块}
+  \begin{block}{定理}
+    $|\langle \mathbf{u}, \mathbf{v} \rangle|^2
+      \leq \langle \mathbf{u}, \mathbf{u} \rangle
+           \cdot \langle \mathbf{v}, \mathbf{v} \rangle$
+  \end{block}
+  \begin{alertblock}{注意}
+    等号条件：线性相关。
+  \end{alertblock}
+  \begin{exampleblock}{例}
+    $\mathbf{u}=(1,2),\;\mathbf{v}=(3,4)$。
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}{公式}
+  \begin{equation}
+    e^{i\pi} + 1 = 0
+  \end{equation}
+  \begin{equation}
+    \hat{f}(\xi) = \int_{-\infty}^{\infty}
+      f(x)\, e^{-2\pi i x \xi}\, dx
+  \end{equation}
+\end{frame}
+
+\end{document}

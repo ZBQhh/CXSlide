@@ -1,0 +1,29 @@
+\documentclass[aspectratio=169, UTF8, trans]{ctexbeamer}
+\usetheme[
+  palette=clinical,
+  output=trans,
+  progress=bar,
+  footstyle=full,
+  secpage=false,
+  endpage=false
+]{CX}
+
+\title{CXSlide Transparency Test}
+\author{CI}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}[plain, noframenumbering]
+  \titlepage
+\end{frame}
+
+\begin{frame}{White Background}
+  \begin{itemize}
+    \item Background should be pure white.
+    \item Header and footer templates should be suppressed.
+    \item \alert{Alert text} should fall back to weight rather than color.
+  \end{itemize}
+\end{frame}
+
+\end{document}

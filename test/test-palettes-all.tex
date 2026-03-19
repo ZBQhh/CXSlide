@@ -1,0 +1,62 @@
+\documentclass[aspectratio=169, UTF8]{ctexbeamer}
+\usetheme[
+  palette=steel,
+  progress=none,
+  footstyle=minimal,
+  secpage=false,
+  endpage=false
+]{CX}
+
+\title{CXSlide Palette Registry Test}
+\author{CI}
+\date{\today}
+
+\ExplSyntaxOn
+\cs_new_protected:Nn \__cxs_palette_check:n
+{
+  \prop_if_exist:cTF { c__cxs_pal_ #1 _prop }
+    { \item #1 }
+    { \item \alert{Missing:~#1} }
+}
+\NewDocumentCommand{\PaletteCheck}{m}
+ {
+  \__cxs_palette_check:n { #1 }
+ }
+\ExplSyntaxOff
+
+\begin{document}
+
+\begin{frame}[plain, noframenumbering]
+  \titlepage
+\end{frame}
+
+\begin{frame}{Registered Palettes}
+  \begin{itemize}
+    \PaletteCheck{steel}
+    \PaletteCheck{forest}
+    \PaletteCheck{ember}
+    \PaletteCheck{graphite}
+    \PaletteCheck{ocean}
+    \PaletteCheck{ivory}
+    \PaletteCheck{chalk}
+    \PaletteCheck{dusk}
+    \PaletteCheck{clinical}
+    \PaletteCheck{terra}
+    \PaletteCheck{sakura}
+    \PaletteCheck{mono}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Palette Smoke}
+  \begin{block}{Block}
+    Primary block rendering works with the active palette.
+  \end{block}
+  \begin{alertblock}{Alert}
+    Alert color path is available.
+  \end{alertblock}
+  \begin{exampleblock}{Example}
+    Example color path is available.
+  \end{exampleblock}
+\end{frame}
+
+\end{document}

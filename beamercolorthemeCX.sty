@@ -1,0 +1,76 @@
+%% ============================================================
+%% beamercolorthemeCX.sty — 颜色主题
+%% ============================================================
+\NeedsTeXFormat{LaTeX2e}[2023/06/01]
+\ProvidesPackage{beamercolorthemeCX}[2025/07/09 v3.0 CXSlide Color Theme]
+
+\input{cxslide-palette-data.def}
+\input{cxslide-palette-load.def}
+
+\ExplSyntaxOn
+\__cxs_load_palette:V \g__cxs_palette_tl
+\ExplSyntaxOff
+
+%%── 基础文本 ──
+\setbeamercolor{normal text}{fg=cx@fg, bg=cx@bg}
+\setbeamercolor{structure}{fg=cx@primary}
+\setbeamercolor{alerted text}{fg=cx@accent}
+\setbeamercolor{example text}{fg=cx@secondary}
+
+%%── 标题 ──
+\setbeamercolor{title}{fg=cx@primary}
+\setbeamercolor{subtitle}{fg=cx@primary!70!cx@fg}
+\setbeamercolor{author}{fg=cx@fg}
+\setbeamercolor{institute}{fg=cx@muted}
+\setbeamercolor{date}{fg=cx@muted}
+\setbeamercolor{frametitle}{fg=white, bg=cx@primary}
+\setbeamercolor{framesubtitle}{fg=cx@bg!70!cx@primary}
+
+%%── 区块 ──
+\setbeamercolor{block title}{fg=white, bg=cx@primary}
+\setbeamercolor{block body}{fg=cx@fg, bg=cx@primary!5!cx@bg}
+\setbeamercolor{block title alerted}{fg=white, bg=cx@accent}
+\setbeamercolor{block body alerted}{fg=cx@fg, bg=cx@accent!5!cx@bg}
+\setbeamercolor{block title example}{fg=white, bg=cx@secondary}
+\setbeamercolor{block body example}{fg=cx@fg, bg=cx@secondary!5!cx@bg}
+
+%%── 导航 ──
+\setbeamercolor{footline}{fg=cx@muted, bg=cx@bg}
+\setbeamercolor{page number in head/foot}{fg=cx@muted}
+\setbeamercolor{section in toc}{fg=cx@primary}
+\setbeamercolor{subsection in toc}{fg=cx@fg}
+\setbeamercolor{section in toc shaded}{fg=cx@muted}
+
+%%── 进度条 ──
+\setbeamercolor{progress bar}{fg=cx@primary, bg=cx@muted!30!cx@bg}
+
+%%── 杂项 ──
+\setbeamercolor{title separator}{fg=cx@primary}
+\setbeamercolor{caption name}{fg=cx@primary}
+
+%%── chalk / mono 特殊覆盖 ──
+\ExplSyntaxOn
+\cxs_if_palette:nT { chalk }
+{
+  \setbeamercolor{frametitle}{fg=cx@fg, bg=cx@bg!80!black}
+  \setbeamercolor{block~title}{fg=cx@bg, bg=cx@fg}
+  \setbeamercolor{block~body}{fg=cx@fg, bg=cx@fg!10!cx@bg}
+  \setbeamercolor{block~title~alerted}{fg=cx@bg, bg=cx@accent}
+  \setbeamercolor{block~body~alerted}{fg=cx@fg, bg=cx@accent!10!cx@bg}
+  \setbeamercolor{block~title~example}{fg=cx@bg, bg=cx@secondary}
+  \setbeamercolor{block~body~example}{fg=cx@fg, bg=cx@secondary!10!cx@bg}
+  \setbeamercolor{title~separator}{fg=cx@fg}
+}
+\cxs_if_palette:nT { mono }
+{
+  \setbeamercolor{frametitle}{fg=cx@accent, bg=cx@secondary}
+  \setbeamercolor{block~title}{fg=cx@bg, bg=cx@fg}
+  \setbeamercolor{block~body}{fg=cx@fg, bg=cx@fg!15!cx@bg}
+  \setbeamercolor{block~title~alerted}{fg=cx@bg, bg=cx@accent}
+  \setbeamercolor{block~body~alerted}{fg=cx@fg, bg=cx@accent!15!cx@bg}
+  \setbeamercolor{block~title~example}{fg=cx@fg, bg=cx@secondary}
+  \setbeamercolor{block~body~example}{fg=cx@fg, bg=cx@secondary!10!cx@bg}
+  \setbeamercolor{title~separator}{fg=cx@accent}
+  \setbeamercolor{progress~bar}{fg=cx@accent, bg=cx@secondary}
+}
+\ExplSyntaxOff

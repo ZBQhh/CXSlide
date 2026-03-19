@@ -1,0 +1,52 @@
+\documentclass[aspectratio=169, UTF8]{ctexbeamer}
+\usetheme[
+  palette=ivory,
+  progress=bar,
+  footstyle=full,
+  secpage=false,
+  endpage=true
+]{CX}
+
+\title{CXSlide Output Test}
+\author{CI}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}[plain, noframenumbering]
+  \titlepage
+\end{frame}
+
+\begin{frame}{Layout Tools}
+  \cxTwoCols{%
+    \begin{itemize}
+      \item Left
+      \item Left
+    \end{itemize}
+  }[0.44]{%
+    \begin{enumerate}
+      \item Right
+      \item Right
+    \end{enumerate}
+  }
+\end{frame}
+
+\begin{frame}[fragile]{Code}
+\begin{lstlisting}[language=Python]
+def square(x):
+    return x * x
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Enhance}
+  \cxSummary{Summary}{\cxHL{highlight} \quad \cxDim{dim} \quad \cxBadge{badge}}
+\end{frame}
+
+\appendix
+\section{Appendix}
+
+\begin{frame}{Q and A}
+  Appendix frame.
+\end{frame}
+
+\end{document}

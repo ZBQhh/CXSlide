@@ -1,0 +1,117 @@
+%% ============================================================
+%% cxslide-titlepage.def — 封面与尾页
+%% ============================================================
+\ExplSyntaxOn
+
+%%── standard 封面 ──
+\cxs_if_titlepage:nT { standard }
+{
+  \setbeamertemplate{title~page}
+  {
+    \vbox to \textheight{
+      \vfil
+      \begin{centering}
+        \begin{beamercolorbox}[sep=0.5em,~center]{title}
+          \usebeamerfont{title}\inserttitle\par
+          \ifx\insertsubtitle\empty\else
+            \vskip 0.3em
+            {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}%
+             \insertsubtitle\par}
+          \fi
+        \end{beamercolorbox}
+        \vskip 1em
+        {\usebeamercolor[fg]{title~separator}%
+         \vrule width 0.3\paperwidth height 0.5pt depth 0pt}
+        \vskip 1em
+        \begin{beamercolorbox}[sep=0.2em,~center]{author}
+          \usebeamerfont{author}\insertauthor
+        \end{beamercolorbox}
+        \begin{beamercolorbox}[sep=0.2em,~center]{institute}
+          \usebeamerfont{institute}\insertinstitute
+        \end{beamercolorbox}
+        \begin{beamercolorbox}[sep=0.2em,~center]{date}
+          \usebeamerfont{date}\insertdate
+        \end{beamercolorbox}
+      \end{centering}
+      \vfil
+    }
+  }
+}
+
+%%── minimal 封面 ──
+\cxs_if_titlepage:nT { minimal }
+{
+  \setbeamertemplate{title~page}
+  {
+    \vbox to \textheight{
+      \vfil
+      \begin{flushleft}
+        \begin{beamercolorbox}[leftskip=1em]{title}
+          \usebeamerfont{title}\inserttitle\par
+          \ifx\insertsubtitle\empty\else
+            \vskip 0.3em
+            {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}%
+             \insertsubtitle\par}
+          \fi
+        \end{beamercolorbox}
+        \vskip 0.5em
+        \begin{beamercolorbox}[leftskip=1em]{author}
+          \usebeamerfont{author}\insertauthor\quad
+          \usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate
+        \end{beamercolorbox}
+        \ifx\insertinstitute\empty\else
+          \vskip 0.2em
+          \begin{beamercolorbox}[leftskip=1em]{institute}
+            \usebeamerfont{institute}\insertinstitute
+          \end{beamercolorbox}
+        \fi
+      \end{flushleft}
+      \vfil
+    }
+  }
+}
+
+%% \cxEndFrame 和 \cxQAFrame
+\newif\ifcxs@endframeinserted
+\cxs@endframeinsertedfalse
+
+\newcommand{\cxs@endframebody}[2]{%
+  \begin{frame}[plain, noframenumbering]
+    \vfill\centering
+    {\usebeamercolor[fg]{structure}\usebeamerfont{title}#1\par}
+    \vskip 1em
+    {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}#2\par}
+    \vfill
+  \end{frame}%
+}
+
+\ExplSyntaxOff
+
+\NewDocumentCommand{\cxEndFrame}{ O{谢谢} O{欢迎批评指正} }{%
+  \global\cxs@endframeinsertedtrue
+  \cxs@endframebody{#1}{#2}%
+}
+
+\ExplSyntaxOn
+\cxs_if_endpage:T
+{
+  \pretocmd{\enddocument}
+    {
+      \ifcxs@endframeinserted\else
+        \global\cxs@endframeinsertedtrue
+        \cxs@endframebody{谢谢}{欢迎批评指正}
+      \fi
+    }{}{}
+}
+\ExplSyntaxOff
+
+\NewDocumentCommand{\cxQAFrame}{ O{提问与讨论} }{%
+  \begin{frame}[plain, noframenumbering]
+    \vfill\centering
+    {\usebeamercolor[fg]{structure}\usebeamerfont{title}#1\par}
+    \vskip 2em
+    {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}%
+      \insertauthor\quad\textbar\quad\insertdate\par}
+    \vfill
+  \end{frame}%
+}

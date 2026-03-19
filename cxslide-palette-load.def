@@ -1,0 +1,29 @@
+%% ============================================================
+%% cxslide-palette-load.def — 调色板加载逻辑
+%% ============================================================
+\ExplSyntaxOn
+
+\cs_new_protected:Nn \__cxs_define_color_from_prop:nnn
+{
+  \prop_get:cnNTF { c__cxs_pal_ #1 _prop } {#2} \l_tmpa_tl
+  { \definecolor {#3} { HTML } { \l_tmpa_tl } }
+  { \msg_critical:nnnn { cxslide } { missing-palette-key } {#1} {#2} }
+}
+
+\cs_new_protected:Nn \__cxs_load_palette:n
+{
+  \prop_if_exist:cF { c__cxs_pal_ #1 _prop }
+  { \msg_critical:nnx { cxslide } { unknown-palette } {#1} }
+
+  \__cxs_define_color_from_prop:nnn {#1} { primary }   { cx@primary }
+  \__cxs_define_color_from_prop:nnn {#1} { secondary } { cx@secondary }
+  \__cxs_define_color_from_prop:nnn {#1} { accent }    { cx@accent }
+  \__cxs_define_color_from_prop:nnn {#1} { bg }        { cx@bg }
+  \__cxs_define_color_from_prop:nnn {#1} { fg }        { cx@fg }
+  \__cxs_define_color_from_prop:nnn {#1} { muted }     { cx@muted }
+  \__cxs_define_color_from_prop:nnn {#1} { highlight } { cx@highlight }
+}
+
+\cs_generate_variant:Nn \__cxs_load_palette:n { V }
+
+\ExplSyntaxOff

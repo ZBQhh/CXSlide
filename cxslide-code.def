@@ -1,0 +1,33 @@
+%% ============================================================
+%% cxslide-code.def — 代码排版（纯 LaTeX2e，无需 expl3）
+%% ============================================================
+
+\lstdefinestyle{cxslide}{%
+  basicstyle       = \ttfamily\footnotesize,
+  keywordstyle     = \bfseries\color{cx@primary},
+  commentstyle     = \itshape\color{cx@muted},
+  stringstyle      = \color{cx@secondary},
+  numberstyle      = \tiny\color{cx@muted},
+  backgroundcolor  = \color{cx@fg!3!cx@bg},
+  frame            = l,
+  framerule        = 1.5pt,
+  rulecolor        = \color{cx@primary},
+  xleftmargin      = 1.2em,
+  breaklines       = true,
+  breakatwhitespace= true,
+  tabsize          = 4,
+  showstringspaces = false,
+  captionpos       = b,
+  aboveskip        = 0.5\medskipamount,
+  belowskip        = 0.5\medskipamount,
+  numbers          = none,
+}
+\lstdefinestyle{cxslide-numbered}{%
+  style=cxslide, numbers=left, numbersep=0.8em,
+}
+\lstset{style=cxslide}
+
+%% \code{inline} — 语义化内联代码
+\NewDocumentCommand{\code}{ m }{%
+  {\ttfamily\small\colorbox{cx@fg!5!cx@bg}{#1}}%
+}

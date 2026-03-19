@@ -1,0 +1,44 @@
+%% ============================================================
+%% cxslide-math.def — 数学排版工具（不依赖 expl3，用 etoolbox）
+%% ============================================================
+
+%% smallmath 环境：局部缩小数学字号
+\NewDocumentEnvironment{smallmath}{}{%
+  \begingroup\small
+  \abovedisplayskip=3pt plus 1pt minus 1pt\relax
+  \belowdisplayskip=3pt plus 1pt minus 1pt\relax
+  \abovedisplayshortskip=1pt plus 1pt\relax
+  \belowdisplayshortskip=1pt plus 1pt\relax
+}{%
+  \endgroup
+}
+
+%% tinymath 环境：极端缩小
+\NewDocumentEnvironment{tinymath}{}{%
+  \begingroup\footnotesize
+  \abovedisplayskip=2pt plus 1pt\relax
+  \belowdisplayskip=2pt plus 1pt\relax
+  \abovedisplayshortskip=0pt plus 1pt\relax
+  \belowdisplayshortskip=0pt plus 1pt\relax
+}{%
+  \endgroup
+}
+
+%% \hlmath<overlay>{content} — 条件高亮（accent + 粗体）
+\NewDocumentCommand{\hlmath}{ D<>{} m }{%
+  \ifblank{#1}%
+    {{\color{cx@accent}#2}}%
+    {\alt<#1>{{\color{cx@accent}#2}}{#2}}%
+}
+
+%% \mathbox<overlay>{content} — 条件背景框
+\NewDocumentCommand{\mathbox}{ D<>{} m }{%
+  \ifblank{#1}%
+    {\colorbox{cx@highlight}{$\displaystyle #2$}}%
+    {\alt<#1>{\colorbox{cx@highlight}{$\displaystyle #2$}}{#2}}%
+}
+
+%% \eqnote{text} — 行内公式注释
+\NewDocumentCommand{\eqnote}{ m }{%
+  \quad{\small\color{cx@muted}\text{#1}}%
+}
