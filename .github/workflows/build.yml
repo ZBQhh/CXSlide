@@ -20,8 +20,7 @@ jobs:
 
       - name: Build test suite
         run: |
-          cd test
-          for f in test-*.tex; do
+          for f in test/test-*.tex; do
             latexmk -xelatex -interaction=nonstopmode -halt-on-error "$f" || exit 1
           done
 
