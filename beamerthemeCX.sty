@@ -14,11 +14,11 @@
 \RequirePackage{xparse}
 
 %% Phase 1: 选项解析
-\input{cxslide-options.def}
+\input{theme/cxslide-options.def}
 \ProcessKeyOptions[cxslide]
 
 %% Phase 2: 诊断
-\input{cxslide-diag.def}
+\input{theme/cxslide-diag.def}
 
 %% Phase 3: 宏包依赖（每行附理由）
 \RequirePackage{unicode-math}           % 数学字体
@@ -35,13 +35,13 @@
 \useoutertheme{CX}
 
 %% Phase 5: 功能模块
-\input{cxslide-math.def}
-\input{cxslide-layout.def}
-\input{cxslide-code.def}
-\input{cxslide-overlay.def}
-\input{cxslide-output.def}
-\input{cxslide-titlepage.def}
-\input{cxslide-enhance.def}
+\input{theme/cxslide-math.def}
+\input{theme/cxslide-layout.def}
+\input{theme/cxslide-code.def}
+\input{theme/cxslide-overlay.def}
+\input{theme/cxslide-output.def}
+\input{theme/cxslide-titlepage.def}
+\input{theme/cxslide-enhance.def}
 
 %% Phase 6: 全局不可变设定
 \setbeamertemplate{navigation symbols}{}

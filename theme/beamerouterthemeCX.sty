@@ -1,0 +1,95 @@
+%% ============================================================
+%% beamerouterthemeCX.sty — 外部主题（进度条/帧标题/页脚）
+%% ============================================================
+\ProvidesFile{theme/beamerouterthemeCX.sty}[2025/07/09 v3.0 CXSlide Outer Theme]
+
+%%── 进度条 ──
+\ExplSyntaxOn
+\cxs_if_progress:nT { bar }
+{
+  \setbeamertemplate{headline}{%
+    \leavevmode
+    \ifnum\inserttotalframenumber>0\relax
+      \dimen0=\paperwidth
+      \multiply\dimen0 by \insertframenumber
+      \divide\dimen0 by \inserttotalframenumber
+      \dimen2=\dimexpr\paperwidth-\dimen0\relax
+      \hbox to \paperwidth{%
+        {\usebeamercolor[fg]{progress bar}\rule{\dimen0}{2pt}}%
+        {\usebeamercolor[bg]{progress bar}\rule{\dimen2}{2pt}}%
+        \hfil
+      }%
+    \else
+      \hbox to \paperwidth{\hfil}%
+    \fi
+  }
+}
+\cxs_if_progress:nT { miniframes }
+{
+  \setbeamertemplate{headline}{%
+    \begin{beamercolorbox}[wd=\paperwidth, ht=2.5ex, dp=1.125ex]{structure}%
+      \insertnavigation{\paperwidth}%
+    \end{beamercolorbox}%
+  }
+}
+\cxs_if_progress:nT { none }
+{
+  \setbeamertemplate{headline}{}
+}
+\ExplSyntaxOff
+
+%%── 帧标题 ──
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip
+  \begin{beamercolorbox}[%
+    wd=\paperwidth, ht=2.8ex, dp=1.2ex,%
+    leftskip=0.8em, rightskip=0.8em%
+  ]{frametitle}%
+    \usebeamerfont{frametitle}\insertframetitle
+    \ifx\insertframesubtitle\empty\else
+      \quad
+      {\usebeamerfont{framesubtitle}%
+       \usebeamercolor[fg]{framesubtitle}%
+       \insertframesubtitle}%
+    \fi
+  \end{beamercolorbox}%
+}
+
+%%── 页脚 ──
+\ExplSyntaxOn
+\cxs_if_footstyle:nT { full }
+{
+  \setbeamertemplate{footline}{%
+    \leavevmode
+    \begin{beamercolorbox}[wd=\paperwidth, ht=2.8ex, dp=1.1ex, sep=0pt]{footline}%
+      \hbox to \paperwidth{%
+        \hskip 0.8em%
+        {\usebeamerfont{footnote}\insertshortauthor}%
+        \hfill
+        {\usebeamerfont{footnote}\insertshorttitle}%
+        \hfill
+        {\usebeamercolor[fg]{page number in head/foot}%
+         \usebeamerfont{footnote}\insertframenumber\,/\,\inserttotalframenumber}%
+        \hskip 0.8em%
+      }%
+    \end{beamercolorbox}%
+  }
+}
+\cxs_if_footstyle:nT { minimal }
+{
+  \setbeamertemplate{footline}{%
+    \leavevmode
+    \begin{beamercolorbox}[wd=\paperwidth, ht=2.8ex, dp=1.1ex, sep=0pt]{page number in head/foot}%
+      \hbox to \paperwidth{%
+        \hfill
+        {\usebeamerfont{footnote}\insertframenumber}%
+        \hskip 0.8em%
+      }%
+    \end{beamercolorbox}%
+  }
+}
+\cxs_if_footstyle:nT { none }
+{
+  \setbeamertemplate{footline}{}
+}
+\ExplSyntaxOff

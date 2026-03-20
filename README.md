@@ -4,7 +4,7 @@
 
 ## 当前状态
 
-- 主题主线可编译，`main.tex` 与 `main-minimal.tex` 已验证通过
+- 主题主线可编译，`examples/main.tex` 与 `examples/main-minimal.tex` 已验证通过
 - 完整示例覆盖列表、区块、数学、布局、代码、overlay、增强工具、参考文献、附录、Q&A
 - `endpage=true` 已实现为可靠的自动结束页注入
 - `article` 接口已预留，但当前版本显式未实现
@@ -13,14 +13,15 @@
 ## 文件结构
 
 - [beamerthemeCX.sty](C:\Users\25890\Desktop\Beamers\beamerthemeCX.sty): 主题入口
-- [beamercolorthemeCX.sty](C:\Users\25890\Desktop\Beamers\beamercolorthemeCX.sty): 颜色主题
-- [beamerfontthemeCX.sty](C:\Users\25890\Desktop\Beamers\beamerfontthemeCX.sty): 字体主题
-- [beamerinnerthemeCX.sty](C:\Users\25890\Desktop\Beamers\beamerinnerthemeCX.sty): 列表、区块、目录
-- [beamerouterthemeCX.sty](C:\Users\25890\Desktop\Beamers\beamerouterthemeCX.sty): 页眉、页脚、进度条
-- [cxslide-*.def](C:\Users\25890\Desktop\Beamers): 功能模块
-- [main-minimal.tex](C:\Users\25890\Desktop\Beamers\main-minimal.tex): 最小示例
-- [main.tex](C:\Users\25890\Desktop\Beamers\main.tex): 完整示例
-- [Design.md](C:\Users\25890\Desktop\Beamers\Design.md): 设计文档
+- [beamercolorthemeCX.sty](C:\Users\25890\Desktop\Beamers\beamercolorthemeCX.sty): 公开颜色主题包装层
+- [beamerfontthemeCX.sty](C:\Users\25890\Desktop\Beamers\beamerfontthemeCX.sty): 公开字体主题包装层
+- [beamerinnerthemeCX.sty](C:\Users\25890\Desktop\Beamers\beamerinnerthemeCX.sty): 公开内部主题包装层
+- [beamerouterthemeCX.sty](C:\Users\25890\Desktop\Beamers\beamerouterthemeCX.sty): 公开外部主题包装层
+- [theme](C:\Users\25890\Desktop\Beamers\theme): 内部主题与功能模块
+- [examples/main-minimal.tex](C:\Users\25890\Desktop\Beamers\examples\main-minimal.tex): 最小示例
+- [examples/main.tex](C:\Users\25890\Desktop\Beamers\examples\main.tex): 完整示例
+- [docs/Design.md](C:\Users\25890\Desktop\Beamers\docs\Design.md): 设计文档
+- [docs/CHANGELOG.md](C:\Users\25890\Desktop\Beamers\docs\CHANGELOG.md): 变更记录
 - [test](C:\Users\25890\Desktop\Beamers\test): 测试样例
 
 ## 依赖
@@ -79,8 +80,8 @@
 编译命令：
 
 ```powershell
-latexmk -xelatex .\main.tex
-latexmk -xelatex .\main-minimal.tex
+latexmk -xelatex .\examples\main.tex
+latexmk -xelatex .\examples\main-minimal.tex
 ```
 
 ## 选项速查

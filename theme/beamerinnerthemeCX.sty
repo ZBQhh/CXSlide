@@ -1,0 +1,118 @@
+%% ============================================================
+%% beamerinnerthemeCX.sty — 内部主题（列表/区块/目录）
+%% ============================================================
+\ProvidesFile{theme/beamerinnerthemeCX.sty}[2025/07/09 v3.0 CXSlide Inner Theme]
+
+%%── 列表标记 ──
+\setbeamertemplate{itemize item}{%
+  \raisebox{0.15ex}{\vrule width 0.6ex height 0.6ex depth 0pt}}
+\setbeamertemplate{itemize subitem}{\small\textbullet}
+\setbeamertemplate{itemize subsubitem}{\textendash}
+\setbeamertemplate{enumerate item}{\insertenumlabel.}
+\setbeamertemplate{enumerate subitem}{%
+  \insertenumlabel.\insertsubenumlabel}
+
+%%── compact 间距 ──
+\ExplSyntaxOn
+\cxs_if_compact:T
+{
+  \setlength{\leftmargini}{1em}
+  \setlength{\leftmarginii}{0.8em}
+  \setlength{\leftmarginiii}{0.6em}
+  \addtobeamertemplate{itemize/enumerate~body~begin}{%
+    \setlength{\itemsep}{1pt}%
+    \setlength{\parsep}{0pt}%
+    \setlength{\parskip}{0pt}%
+    \setlength{\topsep}{2pt}%
+  }{}
+}
+\ExplSyntaxOff
+
+%%── blockcorner → 普通宏（模板定义体可在 LaTeX2e catcode 下引用）──
+\ExplSyntaxOn
+\cxs_if_blockcorner:nTF { round }
+  { \gdef \cxsBlockRounded { true } }
+  { \gdef \cxsBlockRounded { false } }
+\ExplSyntaxOff
+
+%%── block ──
+\setbeamertemplate{block begin}{%
+  \par\vskip\medskipamount
+  \begin{beamercolorbox}[%
+    colsep*=0.6ex, rounded=\cxsBlockRounded, shadow=false%
+  ]{block title}%
+    \usebeamerfont{block title}\insertblocktitle
+  \end{beamercolorbox}%
+  \nointerlineskip
+  \begin{beamercolorbox}[%
+    colsep*=0.6ex, rounded=\cxsBlockRounded, vmode%
+  ]{block body}%
+    \usebeamerfont{block body}%
+}
+\setbeamertemplate{block end}{%
+  \end{beamercolorbox}\vskip\smallskipamount}
+
+%%── alertblock ──
+\setbeamertemplate{block alerted begin}{%
+  \par\vskip\medskipamount
+  \begin{beamercolorbox}[%
+    colsep*=0.6ex, rounded=\cxsBlockRounded, shadow=false%
+  ]{block title alerted}%
+    \usebeamerfont{block title}\insertblocktitle
+  \end{beamercolorbox}%
+  \nointerlineskip
+  \begin{beamercolorbox}[%
+    colsep*=0.6ex, rounded=\cxsBlockRounded, vmode%
+  ]{block body alerted}%
+    \usebeamerfont{block body}%
+}
+\setbeamertemplate{block alerted end}{%
+  \end{beamercolorbox}\vskip\smallskipamount}
+
+%%── exampleblock ──
+\setbeamertemplate{block example begin}{%
+  \par\vskip\medskipamount
+  \begin{beamercolorbox}[%
+    colsep*=0.6ex, rounded=\cxsBlockRounded, shadow=false%
+  ]{block title example}%
+    \usebeamerfont{block title}\insertblocktitle
+  \end{beamercolorbox}%
+  \nointerlineskip
+  \begin{beamercolorbox}[%
+    colsep*=0.6ex, rounded=\cxsBlockRounded, vmode%
+  ]{block body example}%
+    \usebeamerfont{block body}%
+}
+\setbeamertemplate{block example end}{%
+  \end{beamercolorbox}\vskip\smallskipamount}
+
+%%── section 过渡页 ──
+\ExplSyntaxOn
+\cxs_if_secpage:T
+{
+  \AtBeginSection[]
+  {
+    \begin{frame}[plain, noframenumbering]
+      \vfill
+      \centering
+      { \usebeamercolor[fg]{structure}
+        \usebeamerfont{title}
+        \insertsectionhead \par }
+      \vskip 1em
+      { \usebeamercolor[fg]{section~in~toc}
+        \tableofcontents[currentsection, hideallsubsections] }
+      \vfill
+    \end{frame}
+  }
+}
+\ExplSyntaxOff
+
+%%── 目录样式 ──
+\setbeamertemplate{section in toc}{%
+  \leavevmode
+  \usebeamercolor[fg]{section in toc}%
+  \inserttocsectionnumber.~\inserttocsection\par}
+\setbeamertemplate{subsection in toc}{%
+  \hspace{1.5em}%
+  \usebeamercolor[fg]{subsection in toc}%
+  \inserttocsubsectionnumber.~\inserttocsubsection\par}

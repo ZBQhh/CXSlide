@@ -15,8 +15,8 @@ jobs:
 
       - name: Build main examples
         run: |
-          latexmk -xelatex -interaction=nonstopmode -halt-on-error main.tex
-          latexmk -xelatex -interaction=nonstopmode -halt-on-error main-minimal.tex
+          latexmk -xelatex -interaction=nonstopmode -halt-on-error examples/main.tex
+          latexmk -xelatex -interaction=nonstopmode -halt-on-error examples/main-minimal.tex
 
       - name: Build test suite
         run: |
@@ -29,5 +29,4 @@ jobs:
         with:
           name: pdf-artifacts
           path: |
-            *.pdf
-            test/*.pdf
+            build/*.pdf
