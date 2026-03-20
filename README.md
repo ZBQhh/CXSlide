@@ -20,7 +20,8 @@
 - [theme](C:\Users\25890\Desktop\Beamers\theme): 内部主题与功能模块
 - [examples/main-minimal.tex](C:\Users\25890\Desktop\Beamers\examples\main-minimal.tex): 最小示例
 - [examples/main.tex](C:\Users\25890\Desktop\Beamers\examples\main.tex): 仅负责装配的完整示例入口
-- [examples/slides](C:\Users\25890\Desktop\Beamers\examples\slides): 完整示例的内容分片
+- [examples/slides.tex](C:\Users\25890\Desktop\Beamers\examples\slides.tex): 完整示例的总内容入口
+- [examples/sections](C:\Users\25890\Desktop\Beamers\examples\sections): 按章节拆分的示例内容
 - [docs/Design.md](C:\Users\25890\Desktop\Beamers\docs\Design.md): 设计文档
 - [docs/CHANGELOG.md](C:\Users\25890\Desktop\Beamers\docs\CHANGELOG.md): 变更记录
 - [test](C:\Users\25890\Desktop\Beamers\test): 测试样例

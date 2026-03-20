@@ -1,0 +1,31 @@
+\section{代码与动画}
+
+\begin{frame}[fragile]{代码环境}
+  \begin{lstlisting}[language=Python]
+def fib(n: int) -> int:
+    if n < 2:
+        return n
+    return fib(n - 1) + fib(n - 2)
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}{Overlay 稳定区}
+  \begin{itemize}
+    \item<1-> 第一步：给出问题背景
+    \item<2-> 第二步：给出方法框架
+    \item<3-> 第三步：给出结论与边界
+  \end{itemize}
+
+  \begin{overlayarea}{\textwidth}{2.5cm}
+  \end{overlayarea}
+\end{frame}
+
+\begin{frame}{渐进揭示}
+  \begin{block}{发布节奏}
+    \begin{enumerate}
+      \item<1-> 先稳定主题能力
+      \item<2-> 再补齐内容样例
+      \item<3-> 最后补全 CI 与测试
+    \end{enumerate}
+  \end{block}
+\end{frame}

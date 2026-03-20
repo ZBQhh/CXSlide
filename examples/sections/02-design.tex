@@ -1,0 +1,29 @@
+\section{设计原则}
+
+\begin{frame}{内容与样式分离}
+  \begin{itemize}
+    \item 主题文件负责色彩、字体、页眉页脚与结构模板
+    \item 正文示例只声明内容，不直接写局部字号和颜色
+    \item 示例入口负责装配，章节文件负责内容组织
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{列表与层次}
+  \begin{enumerate}
+    \item 一级结论用于表达主线
+    \item 二级层次用于解释前提与条件
+    \item 重点内容通过 \alert{强调语义} 而不是硬编码样式
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Block 环境}
+  \begin{block}{标准信息}
+    适合给出定义、原则和通用说明。
+  \end{block}
+  \begin{alertblock}{风险提示}
+    适合标记限制、注意事项和潜在误用。
+  \end{alertblock}
+  \begin{exampleblock}{示例说明}
+    适合放置示例、练习和可复用模板。
+  \end{exampleblock}
+\end{frame}
