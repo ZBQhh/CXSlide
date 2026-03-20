@@ -1,0 +1,30 @@
+\section{代码与动画}
+
+\begin{frame}[fragile]{代码排版}
+\begin{lstlisting}[language=Python]
+def fibonacci(n):
+    """Calculate the n-th Fibonacci number."""
+    if n <= 1:
+        return n
+    return fibonacci(n-1) + fibonacci(n-2)
+\end{lstlisting}
+  内联代码：\code{fibonacci(10) = 55}
+\end{frame}
+
+\begin{frame}{Overlay 稳定性}
+  \cxFixedArea[5em]{%
+    \only<1>{第一帧：较短文字。}%
+    \only<2>{第二帧：这段稍长，但固定区域保证不跳动。}%
+    \only<3>{第三帧：最终状态。}%
+  }
+
+  以下内容不受影响：
+  \begin{itemize}
+    \item 稳定项 A
+    \item 稳定项 B
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{分步揭示}
+  \cxStepReveal{需求收集 | 方案建模 | 主题映射 | 质量校验}
+\end{frame}

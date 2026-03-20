@@ -1,0 +1,47 @@
+\section{数学与排版}
+
+\begin{frame}{公式高亮与注释}
+  Fourier 变换：
+  \begin{align}
+    \hat{f}(\xi)
+      &= \int_{-\infty}^{\infty}
+           f(x)\, e^{-2\pi i x \xi}\, dx \\
+    \uncover<2->{
+      \widehat{f*g}(\xi)
+      &= \hlmath<2>{\hat{f}(\xi)\cdot\hat{g}(\xi)}
+    }
+  \end{align}
+  \onslide<2->{\eqnote{卷积定理}}
+\end{frame}
+
+\begin{frame}{密集公式}
+  \begin{smallmath}
+    \begin{align}
+      \nabla\cdot\mathbf{E}
+        &= \frac{\rho}{\varepsilon_0} \\
+      \nabla\cdot\mathbf{B}
+        &= 0 \\
+      \nabla\times\mathbf{E}
+        &= -\frac{\partial\mathbf{B}}{\partial t} \\
+      \nabla\times\mathbf{B}
+        &= \mu_0\mathbf{J}
+          +\mu_0\varepsilon_0
+           \frac{\partial\mathbf{E}}{\partial t}
+    \end{align}
+  \end{smallmath}
+\end{frame}
+
+\begin{frame}{数学盒与极端压缩}
+  \begin{tinymath}
+    \begin{align}
+      \mathbox<1>{\sum_{k=1}^{n} k}
+      &= \mathbox<1>{\frac{n(n+1)}{2}} \\
+      \mathbox<2>{\sum_{k=1}^{n} k^2}
+      &= \mathbox<2>{\frac{n(n+1)(2n+1)}{6}}
+    \end{align}
+  \end{tinymath}
+
+  \cxSummary{排版策略}{%
+    在信息密度上升时，优先压缩留白，再降级到局部数学字号，而不是整体缩小整页。%
+  }
+\end{frame}
