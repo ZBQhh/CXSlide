@@ -1,4 +1,7 @@
 \documentclass[aspectratio=169, UTF8]{ctexbeamer}
+\makeatletter
+\def\input@path{{./}{../}{theme/}{../theme/}{examples/slides/}{slides/}}
+\makeatother
 \usetheme[
   palette   = ivory,
   progress  = bar,
@@ -16,12 +19,12 @@
 
 \begin{document}
 
-\input{examples/slides/00-frontmatter.tex}
-\input{examples/slides/01-design-principles.tex}
-\input{examples/slides/02-math-typesetting.tex}
-\input{examples/slides/03-layout-structure.tex}
-\input{examples/slides/04-code-overlay.tex}
-\input{examples/slides/05-enhancements.tex}
-\input{examples/slides/06-appendix.tex}
+\input{00-frontmatter.tex}
+\input{01-design-principles.tex}
+\input{02-math-typesetting.tex}
+\input{03-layout-structure.tex}
+\input{04-code-overlay.tex}
+\input{05-enhancements.tex}
+\input{06-appendix.tex}
 
 \end{document}
